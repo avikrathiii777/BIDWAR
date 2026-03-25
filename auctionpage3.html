@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Auction – Budget</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0c12;
+    --surface: #12151e;
+    --surface2: #1a1f2e;
+    --border: #2a3044;
+    --accent: #f0b429;
+    --accent2: #e05c2a;
+    --text: #e8ecf4;
+    --muted: #7a839a;
+    --radius: 12px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 24px 16px 40px;
+    background-image:
+      radial-gradient(ellipse at 50% 0%, rgba(240,180,41,0.08) 0%, transparent 55%);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 32px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 42px;
+    letter-spacing: 4px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+  }
+
+  .step-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 6px 16px;
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .step-badge span {
+    width: 20px; height: 20px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    color: #000;
+  }
+
+  .steps-row {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 40px;
+  }
+
+  .step-dot { width: 32px; height: 4px; border-radius: 2px; background: var(--border); }
+  .step-dot.done { background: rgba(240,180,41,0.4); }
+  .step-dot.active { background: linear-gradient(90deg, var(--accent), var(--accent2)); }
+
+  .budget-hero {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+
+  .budget-hero .icon {
+    font-size: 56px;
+    display: block;
+    margin-bottom: 12px;
+    filter: drop-shadow(0 0 20px rgba(240,180,41,0.4));
+  }
+
+  .budget-hero h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 2px;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+
+  .budget-hero p {
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.5;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    margin-bottom: 16px;
+  }
+
+  label {
+    display: block;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--muted);
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+
+  .input-wrap {
+    position: relative;
+  }
+
+  .currency-sign {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    color: var(--accent);
+    font-weight: 700;
+    pointer-events: none;
+  }
+
+  input {
+    width: 100%;
+    padding: 16px 16px 16px 38px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(240,180,41,0.12);
+  }
+
+  input::placeholder { color: var(--muted); font-weight: 400; font-size: 16px; }
+
+  .quick-amounts {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+    flex-wrap: wrap;
+  }
+
+  .quick-btn {
+    flex: 1;
+    min-width: 60px;
+    padding: 8px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--muted);
+    font-size: 13px;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s;
+    width: auto;
+    font-weight: 500;
+  }
+
+  .quick-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: rgba(240,180,41,0.06);
+  }
+
+  button.btn-primary {
+    width: 100%;
+    padding: 16px 20px;
+    border: none;
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: #000;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  button.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(240,180,41,0.35);
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="logo">⚡ BidWar</div>
+  <div class="step-badge"><span>3</span> Budget</div>
+</div>
+
+<div class="steps-row">
+  <div class="step-dot done"></div>
+  <div class="step-dot done"></div>
+  <div class="step-dot active"></div>
+  <div class="step-dot"></div>
+</div>
+
+<div class="budget-hero">
+  <span class="icon">💰</span>
+  <h2>Set Team Budget</h2>
+  <p>Each team will receive the same<br>starting budget for bidding.</p>
+</div>
+
+<div class="card">
+  <label>Budget per team</label>
+  <div class="input-wrap">
+    <span class="currency-sign">₹</span>
+    <input type="number" id="budget" placeholder="Enter amount">
+  </div>
+  <div class="quick-amounts">
+    <div class="quick-btn" onclick="setAmt(500)">₹500</div>
+    <div class="quick-btn" onclick="setAmt(1000)">₹1K</div>
+    <div class="quick-btn" onclick="setAmt(5000)">₹5K</div>
+    <div class="quick-btn" onclick="setAmt(10000)">₹10K</div>
+  </div>
+</div>
+
+<button class="btn-primary" onclick="startAuction()">🚀 Launch Auction</button>
+
+<script>
+function setAmt(v){ document.getElementById("budget").value = v; }
+</script>
+<script src="auctionpage3.js"></script>
+</body>
+</html>
