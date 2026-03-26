@@ -41,7 +41,7 @@ Works in all modern browsers — Chrome, Edge, Firefox, Safari, and mobile brows
 - All files must stay in the same folder for page navigation to work
 - Data is stored in browser `localStorage` — clearing browser data will reset the auction
 - For best mobile experience, open in Chrome and use Add to Home Screen
-- Just entering blankspaces in names and team name and captains won't work. Please enter names or even numbers.
+- Just entering blankspaces in names and team name and captains won't work. Please enter names or ,even, numbers.
  
 ---
  
