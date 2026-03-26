@@ -13,13 +13,12 @@
     --border: #2a3044;
     --accent: #f0b429;
     --accent2: #e05c2a;
+    --red: #ef4444;
     --text: #e8ecf4;
     --muted: #7a839a;
     --radius: 12px;
   }
-
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
   body {
     font-family: 'DM Sans', sans-serif;
     background: var(--bg);
@@ -30,175 +29,79 @@
       radial-gradient(ellipse at 20% 10%, rgba(240,180,41,0.06) 0%, transparent 50%),
       radial-gradient(ellipse at 80% 90%, rgba(224,92,42,0.06) 0%, transparent 50%);
   }
-
-  .header {
-    text-align: center;
-    margin-bottom: 32px;
-    padding-bottom: 24px;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .header .logo {
+  .header { text-align: center; margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px solid var(--border); }
+  .logo {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 42px;
-    letter-spacing: 4px;
+    font-size: 42px; letter-spacing: 4px;
     background: linear-gradient(135deg, var(--accent), var(--accent2));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     line-height: 1;
   }
-
   .step-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 999px;
-    padding: 6px 16px;
-    font-size: 13px;
-    color: var(--muted);
-    margin-top: 10px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 999px; padding: 6px 16px;
+    font-size: 13px; color: var(--muted); margin-top: 10px;
+    letter-spacing: 1px; text-transform: uppercase;
   }
-
   .step-badge span {
     width: 20px; height: 20px;
     background: linear-gradient(135deg, var(--accent), var(--accent2));
-    border-radius: 50%;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 11px;
-    font-weight: 700;
-    color: #000;
+    border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700; color: #000;
   }
-
-  .steps-row {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    margin-bottom: 28px;
-  }
-
-  .step-dot {
-    width: 32px; height: 4px;
-    border-radius: 2px;
-    background: var(--border);
-  }
+  .steps-row { display: flex; justify-content: center; gap: 8px; margin-bottom: 28px; }
+  .step-dot { width: 32px; height: 4px; border-radius: 2px; background: var(--border); }
   .step-dot.active { background: linear-gradient(90deg, var(--accent), var(--accent2)); }
-
-  .card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 20px;
-    margin-bottom: 16px;
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; margin-bottom: 16px; }
+  input[type="text"] {
+    width: 100%; padding: 14px 16px;
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 8px; color: var(--text);
+    font-family: 'DM Sans', sans-serif; font-size: 16px;
+    outline: none; transition: border-color 0.2s, box-shadow 0.2s;
   }
-
-  label {
-    display: block;
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    color: var(--muted);
-    margin-bottom: 8px;
-    font-weight: 500;
-  }
-
-  input[type="number"], input[type="text"] {
-    width: 100%;
-    padding: 14px 16px;
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    color: var(--text);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 16px;
-    margin-bottom: 12px;
-    outline: none;
-    transition: border-color 0.2s, box-shadow 0.2s;
-  }
-
-  input:focus {
-    border-color: var(--accent);
-    box-shadow: 0 0 0 3px rgba(240,180,41,0.12);
-  }
-
+  input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(240,180,41,0.12); }
   input::placeholder { color: var(--muted); }
-
   button {
-    width: 100%;
-    padding: 14px 20px;
-    border: none;
-    border-radius: 8px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s;
-    letter-spacing: 0.3px;
+    width: 100%; padding: 14px 20px; border: none; border-radius: 8px;
+    font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 600;
+    cursor: pointer; transition: all 0.2s; letter-spacing: 0.3px;
   }
-
-  .btn-secondary {
-    background: var(--surface2);
-    color: var(--text);
-    border: 1px solid var(--border);
-    margin-bottom: 12px;
+  .btn-add {
+    background: var(--surface2); color: var(--accent);
+    border: 1px dashed rgba(240,180,41,0.4);
+    margin-bottom: 0; font-size: 14px; padding: 12px;
   }
-
-  .btn-secondary:hover {
-    border-color: var(--accent);
-    color: var(--accent);
-  }
-
+  .btn-add:hover { border-color: var(--accent); background: rgba(240,180,41,0.06); }
   .btn-primary {
     background: linear-gradient(135deg, var(--accent), var(--accent2));
-    color: #000;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    margin-top: 4px;
+    color: #000; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-top: 4px;
   }
-
-  .btn-primary:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 6px 24px rgba(240,180,41,0.3);
-  }
-
+  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 24px rgba(240,180,41,0.3); }
   .btn-primary:active { transform: translateY(0); }
-
-  #playerInputs { animation: fadeIn 0.3s ease; }
-
   .player-row {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 10px;
+    display: flex; align-items: center; gap: 10px; margin-bottom: 10px;
+    animation: fadeIn 0.2s ease;
   }
-
   .player-num {
-    width: 32px; height: 32px;
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 12px;
-    color: var(--muted);
-    font-weight: 600;
-    flex-shrink: 0;
+    width: 32px; height: 32px; background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: var(--muted); font-weight: 600; flex-shrink: 0;
   }
-
   .player-row input { margin: 0; flex: 1; }
-
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(8px); }
-    to { opacity: 1; transform: translateY(0); }
+  .btn-remove {
+    width: 32px; height: 32px; flex-shrink: 0; padding: 0;
+    background: transparent; border: 1px solid var(--border);
+    border-radius: 50%; color: var(--muted); font-size: 16px; line-height: 1;
+    display: flex; align-items: center; justify-content: center;
   }
+  .btn-remove:hover { border-color: var(--red); color: var(--red); background: rgba(239,68,68,0.08); }
+  .player-count {
+    font-size: 12px; color: var(--muted); text-align: center;
+    margin-bottom: 10px; letter-spacing: 0.5px;
+  }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
 </style>
 </head>
 <body>
@@ -215,32 +118,14 @@
   <div class="step-dot"></div>
 </div>
 
-<div class="card">
-  <label>Number of Players</label>
-  <input type="number" id="players" placeholder="e.g. 20" min="1">
-  <button class="btn-secondary" onclick="generatePlayers()">Generate Player Fields</button>
+<div class="card" id="playersCard">
+  <div class="player-count" id="playerCount">0 players added</div>
+  <div id="playerInputs"></div>
+  <button class="btn-add" id="btnAddPlayer">+ Add Player</button>
 </div>
 
-<div id="playerInputs"></div>
-
-<button class="btn-primary" onclick="nextPage()">Continue to Teams →</button>
+<button class="btn-primary" id="btnNext">Continue to Teams →</button>
 
 <script src="auctionpage1.js"></script>
-<script>
-// Override generatePlayers for styled rows
-function generatePlayers(){
-  const n = parseInt(document.getElementById("players").value);
-  const d = document.getElementById("playerInputs");
-  if(!n || n < 1) return;
-  d.innerHTML = '<div class="card">';
-  for(let i = 1; i <= n; i++){
-    d.innerHTML += `<div class="player-row">
-      <div class="player-num">${i}</div>
-      <input type="text" placeholder="Player ${i} name">
-    </div>`;
-  }
-  d.innerHTML += '</div>';
-}
-</script>
 </body>
 </html>
