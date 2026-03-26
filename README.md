@@ -3,18 +3,20 @@
 A lightweight, mobile-friendly web app for running live player auctions for cricket and sports teams. No installation, no internet, no server — just open and play.
  
 ---
- 
-## 📸 Pages
- 
-| Step | Page | Description |
-|------|------|-------------|
-| 1 | `auctionpage1.html` | Enter all player names |
-| 2 | `auctionpage2.html` | Create teams and assign captains |
-| 3 | `auctionpage3.html` | Set a budget for each team |
-| 4 | `auctionpage4.html` | Live bidding screen |
- 
+
+## HOW TO PLAY??
+
+-1.Enter number of players and their names.
+-2.Select number of teams and their names with captains.
+-3.Enter budget for each team.
+-4.Live auction has buttons with their uses mentioned on them.
+
+
+
+
+
+
 ---
- 
 ## ✨ Features
  
 - 4-step guided auction setup
@@ -41,7 +43,7 @@ Works in all modern browsers — Chrome, Edge, Firefox, Safari, and mobile brows
 - All files must stay in the same folder for page navigation to work
 - Data is stored in browser `localStorage` — clearing browser data will reset the auction
 - For best mobile experience, open in Chrome and use Add to Home Screen
-- Just entering blankspaces in names and team name and captains won't work. Please enter names or ,even, numbers.
+- Just entering blankspaces in names and team name and captains won't work. Please enter names or ,even, numbers. Do NOT enter blankspaces.
  
 ---
  
