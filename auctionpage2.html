@@ -13,13 +13,12 @@
     --border: #2a3044;
     --accent: #f0b429;
     --accent2: #e05c2a;
+    --red: #ef4444;
     --text: #e8ecf4;
     --muted: #7a839a;
     --radius: 12px;
   }
-
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
   body {
     font-family: 'DM Sans', sans-serif;
     background: var(--bg);
@@ -30,156 +29,82 @@
       radial-gradient(ellipse at 80% 10%, rgba(240,180,41,0.06) 0%, transparent 50%),
       radial-gradient(ellipse at 20% 90%, rgba(224,92,42,0.06) 0%, transparent 50%);
   }
-
-  .header {
-    text-align: center;
-    margin-bottom: 32px;
-    padding-bottom: 24px;
-    border-bottom: 1px solid var(--border);
-  }
-
+  .header { text-align: center; margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px solid var(--border); }
   .logo {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 42px;
-    letter-spacing: 4px;
+    font-size: 42px; letter-spacing: 4px;
     background: linear-gradient(135deg, var(--accent), var(--accent2));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     line-height: 1;
   }
-
   .step-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 999px;
-    padding: 6px 16px;
-    font-size: 13px;
-    color: var(--muted);
-    margin-top: 10px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 999px; padding: 6px 16px;
+    font-size: 13px; color: var(--muted); margin-top: 10px;
+    letter-spacing: 1px; text-transform: uppercase;
   }
-
   .step-badge span {
     width: 20px; height: 20px;
     background: linear-gradient(135deg, var(--accent), var(--accent2));
-    border-radius: 50%;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 11px;
-    font-weight: 700;
-    color: #000;
+    border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700; color: #000;
   }
-
-  .steps-row {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    margin-bottom: 28px;
-  }
-
+  .steps-row { display: flex; justify-content: center; gap: 8px; margin-bottom: 28px; }
   .step-dot { width: 32px; height: 4px; border-radius: 2px; background: var(--border); }
   .step-dot.done { background: rgba(240,180,41,0.4); }
   .step-dot.active { background: linear-gradient(90deg, var(--accent), var(--accent2)); }
-
-  .card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 20px;
-    margin-bottom: 16px;
-  }
-
-  label {
-    display: block;
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    color: var(--muted);
-    margin-bottom: 8px;
-    font-weight: 500;
-  }
-
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; margin-bottom: 16px; }
   input {
-    width: 100%;
-    padding: 14px 16px;
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    color: var(--text);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 16px;
-    margin-bottom: 12px;
-    outline: none;
-    transition: border-color 0.2s, box-shadow 0.2s;
+    width: 100%; padding: 14px 16px;
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 8px; color: var(--text);
+    font-family: 'DM Sans', sans-serif; font-size: 16px;
+    outline: none; transition: border-color 0.2s, box-shadow 0.2s;
   }
-
-  input:focus {
-    border-color: var(--accent);
-    box-shadow: 0 0 0 3px rgba(240,180,41,0.12);
-  }
-
+  input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(240,180,41,0.12); }
   input::placeholder { color: var(--muted); }
-
   button {
-    width: 100%;
-    padding: 14px 20px;
-    border: none;
-    border-radius: 8px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s;
+    width: 100%; padding: 14px 20px; border: none; border-radius: 8px;
+    font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 600;
+    cursor: pointer; transition: all 0.2s;
   }
-
-  .btn-secondary {
-    background: var(--surface2);
-    color: var(--text);
-    border: 1px solid var(--border);
-    margin-bottom: 12px;
+  .btn-add {
+    background: var(--surface2); color: var(--accent);
+    border: 1px dashed rgba(240,180,41,0.4);
+    font-size: 14px; padding: 12px;
   }
-
-  .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
-
+  .btn-add:hover { border-color: var(--accent); background: rgba(240,180,41,0.06); }
   .btn-primary {
     background: linear-gradient(135deg, var(--accent), var(--accent2));
-    color: #000;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    margin-top: 4px;
+    color: #000; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-top: 4px;
   }
-
-  .btn-primary:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 6px 24px rgba(240,180,41,0.3);
+  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 24px rgba(240,180,41,0.3); }
+  .team-row {
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 10px; padding: 14px; margin-bottom: 12px;
+    animation: fadeIn 0.2s ease;
   }
-
-  .team-block {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 14px;
-    margin-bottom: 12px;
+  .team-row-header {
+    display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;
   }
-
-  .team-block-header {
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    color: var(--accent);
-    font-weight: 600;
-    margin-bottom: 10px;
+  .team-label {
+    font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px;
+    color: var(--accent); font-weight: 600;
   }
-
-  .team-block input { margin-bottom: 8px; }
-  .team-block input:last-child { margin-bottom: 0; }
+  .btn-remove {
+    width: 28px; height: 28px; padding: 0; border: 1px solid var(--border);
+    border-radius: 50%; background: transparent; color: var(--muted);
+    font-size: 16px; display: flex; align-items: center; justify-content: center; cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-remove:hover { border-color: var(--red); color: var(--red); background: rgba(239,68,68,0.08); }
+  .team-row input:first-of-type { margin-bottom: 10px; }
+  .team-count {
+    font-size: 12px; color: var(--muted); text-align: center;
+    margin-bottom: 10px; letter-spacing: 0.5px;
+  }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
 </style>
 </head>
 <body>
@@ -197,30 +122,13 @@
 </div>
 
 <div class="card">
-  <label>Number of Teams</label>
-  <input type="number" id="teams" placeholder="e.g. 4" min="1">
-  <button class="btn-secondary" onclick="generateTeams()">Generate Team Fields</button>
+  <div class="team-count" id="teamCount">0 teams added</div>
+  <div id="teamInputs"></div>
+  <button class="btn-add" id="btnAddTeam">+ Add Team</button>
 </div>
 
-<div id="teamInputs"></div>
-
-<button class="btn-primary" onclick="nextPage()">Continue to Budget →</button>
+<button class="btn-primary" id="btnNext">Continue to Budget →</button>
 
 <script src="auctionpage2.js"></script>
-<script>
-function generateTeams(){
-  const n = parseInt(document.getElementById("teams").value);
-  const d = document.getElementById("teamInputs");
-  if(!n || n < 1) return;
-  d.innerHTML = '';
-  for(let i = 1; i <= n; i++){
-    d.innerHTML += `<div class="team-block">
-      <div class="team-block-header">🏆 Team ${i}</div>
-      <input type="text" placeholder="Team name">
-      <input type="text" placeholder="Captain name">
-    </div>`;
-  }
-}
-</script>
 </body>
 </html>
