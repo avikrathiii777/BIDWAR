@@ -7,16 +7,15 @@ A lightweight, mobile-friendly web app for running live player auctions for cric
 ## HOW TO PLAY??
 
 -1.Enter number of players and their names.
+
 -2.Select number of teams and their names with captains.
+
 -3.Enter budget for each team.
+
 -4.Live auction has buttons with their uses mentioned on them.
 
-
-
-
-
-
 ---
+
 ## ✨ Features
  
 - 4-step guided auction setup
