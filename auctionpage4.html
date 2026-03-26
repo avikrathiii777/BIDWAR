@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>⚡ Live Auction</title>
+<title>Live Auction</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -20,446 +20,284 @@
     --muted: #6b7490;
     --radius: 12px;
   }
-
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   body {
     font-family: 'DM Sans', sans-serif;
     background: var(--bg);
     color: var(--text);
     min-height: 100vh;
     padding-bottom: 40px;
-    background-image:
-      radial-gradient(ellipse at 50% -10%, rgba(240,180,41,0.08) 0%, transparent 50%);
+    background-image: radial-gradient(ellipse at 50% -10%, rgba(240,180,41,0.08) 0%, transparent 50%);
   }
 
-  /* TOP BAR */
+  /* TOPBAR */
   .topbar {
-    position: sticky;
-    top: 0;
-    z-index: 100;
+    position: sticky; top: 0; z-index: 100;
     background: rgba(7,9,15,0.92);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
     padding: 12px 16px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
+    display: flex; align-items: center; justify-content: space-between; gap: 10px;
   }
-
   .topbar-logo {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 24px;
-    letter-spacing: 3px;
+    font-size: 24px; letter-spacing: 3px;
     background: linear-gradient(135deg, var(--accent), var(--accent2));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
   }
-
-  .topbar-actions {
-    display: flex;
-    gap: 8px;
-  }
-
+  .topbar-actions { display: flex; gap: 8px; }
   .icon-btn {
     padding: 8px 14px;
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    color: var(--muted);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s;
-    white-space: nowrap;
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 8px; color: var(--muted);
+    font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600;
+    cursor: pointer; transition: all 0.2s; white-space: nowrap;
   }
-
   .icon-btn:hover { border-color: var(--text); color: var(--text); }
   .icon-btn.undo:hover { border-color: var(--red); color: var(--red); }
-
-  /* LIVE BADGE */
+  .icon-btn.finish { border-color: rgba(34,197,94,0.4); color: var(--green); }
+  .icon-btn.finish:hover { border-color: var(--green); background: rgba(34,197,94,0.08); }
   .live-badge {
-    display: flex;
-    align-items: center;
-    gap: 6px;
+    display: flex; align-items: center; gap: 6px;
     padding: 4px 10px;
-    background: rgba(239,68,68,0.15);
-    border: 1px solid rgba(239,68,68,0.3);
-    border-radius: 999px;
-    font-size: 12px;
-    font-weight: 700;
-    color: var(--red);
-    letter-spacing: 1px;
-    text-transform: uppercase;
+    background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3);
+    border-radius: 999px; font-size: 12px; font-weight: 700; color: var(--red);
+    letter-spacing: 1px; text-transform: uppercase;
   }
-
   .live-dot {
-    width: 6px; height: 6px;
-    background: var(--red);
-    border-radius: 50%;
+    width: 6px; height: 6px; background: var(--red); border-radius: 50%;
     animation: pulse 1.4s ease-in-out infinite;
   }
-
-  @keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.5; transform: scale(1.3); }
-  }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.3)} }
 
   /* MAIN */
   .main { padding: 16px; }
 
   /* BID PANEL */
   .bid-panel {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 20px;
-    margin-bottom: 16px;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 20px; margin-bottom: 16px;
   }
-
   .panel-title {
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: var(--muted);
-    font-weight: 600;
-    margin-bottom: 14px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+    font-size: 11px; text-transform: uppercase; letter-spacing: 2px;
+    color: var(--muted); font-weight: 600; margin-bottom: 14px;
+    display: flex; align-items: center; gap: 8px;
   }
-
-  .panel-title::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--border);
-  }
-
+  .panel-title::after { content:''; flex:1; height:1px; background:var(--border); }
   label {
-    display: block;
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    color: var(--muted);
-    margin-bottom: 6px;
-    font-weight: 600;
+    display: block; font-size: 11px; text-transform: uppercase;
+    letter-spacing: 1.5px; color: var(--muted); margin-bottom: 6px; font-weight: 600;
   }
-
   select, input[type="number"] {
-    width: 100%;
-    padding: 13px 14px;
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    color: var(--text);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 15px;
-    margin-bottom: 12px;
-    outline: none;
-    transition: border-color 0.2s, box-shadow 0.2s;
-    -webkit-appearance: none;
-    appearance: none;
+    width: 100%; padding: 13px 14px;
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 8px; color: var(--text);
+    font-family: 'DM Sans', sans-serif; font-size: 15px; margin-bottom: 12px;
+    outline: none; transition: border-color 0.2s, box-shadow 0.2s;
+    -webkit-appearance: none; appearance: none;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b7490' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 14px center;
+    background-repeat: no-repeat; background-position: right 14px center;
   }
-
   select { padding-right: 36px; }
-
-  select:focus, input:focus {
-    border-color: var(--accent);
-    box-shadow: 0 0 0 3px rgba(240,180,41,0.1);
-  }
-
+  select:focus, input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(240,180,41,0.1); }
   input::placeholder { color: var(--muted); }
-
   .btn-row { display: flex; gap: 10px; margin-top: 4px; }
-
   button {
-    padding: 13px 16px;
-    border: none;
-    border-radius: 8px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.18s;
-    letter-spacing: 0.3px;
+    padding: 13px 16px; border: none; border-radius: 8px;
+    font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 700;
+    cursor: pointer; transition: all 0.18s; letter-spacing: 0.3px;
   }
-
   .btn-add {
     flex: 2;
     background: linear-gradient(135deg, var(--green), #16a34a);
-    color: #fff;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    color: #fff; text-transform: uppercase; letter-spacing: 1px;
   }
-
-  .btn-add:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 6px 20px rgba(34,197,94,0.3);
-  }
-
+  .btn-add:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(34,197,94,0.3); }
   .btn-random {
-    flex: 1;
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    color: var(--purple);
-    font-size: 13px;
+    flex: 1; background: var(--surface2); border: 1px solid var(--border);
+    color: var(--purple); font-size: 13px;
   }
-
   .btn-random:hover { border-color: var(--purple); background: rgba(168,85,247,0.08); }
-
-  /* QUICK BID */
-  .quick-bid {
-    display: flex;
-    gap: 6px;
-    margin-bottom: 12px;
-    flex-wrap: wrap;
-  }
-
+  .quick-bid { display: flex; gap: 6px; margin-bottom: 12px; flex-wrap: wrap; }
   .qb {
-    flex: 1;
-    min-width: 50px;
-    padding: 7px 4px;
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    color: var(--muted);
-    font-size: 12px;
-    font-family: 'DM Sans', sans-serif;
-    cursor: pointer;
-    text-align: center;
-    font-weight: 600;
-    transition: all 0.18s;
-    width: auto;
+    flex:1; min-width:50px; padding:7px 4px;
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 6px;
+    color: var(--muted); font-size: 12px; font-family: 'DM Sans', sans-serif;
+    cursor: pointer; text-align: center; font-weight: 600; transition: all 0.18s; width: auto;
   }
-
   .qb:hover { border-color: var(--accent); color: var(--accent); background: rgba(240,180,41,0.05); }
 
   /* SECTION HEADER */
-  .section-header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin: 20px 0 12px;
-  }
-
-  .section-header h3 {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 22px;
-    letter-spacing: 2px;
-    color: var(--text);
-  }
-
+  .section-header { display: flex; align-items: center; gap: 10px; margin: 20px 0 12px; }
+  .section-header h3 { font-family:'Bebas Neue',sans-serif; font-size:22px; letter-spacing:2px; }
   .section-header .count {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 999px;
-    padding: 2px 10px;
-    font-size: 12px;
-    color: var(--muted);
-    font-weight: 600;
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 999px; padding: 2px 10px; font-size: 12px; color: var(--muted); font-weight: 600;
   }
 
   /* TEAM CARDS */
   .teams-grid { display: flex; flex-direction: column; gap: 12px; }
-
   .team-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 16px;
-    transition: border-color 0.2s;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 16px; transition: border-color 0.2s;
     animation: slideIn 0.3s ease;
   }
-
   .team-card:hover { border-color: rgba(240,180,41,0.3); }
-
-  @keyframes slideIn {
-    from { opacity: 0; transform: translateY(8px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .team-card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 10px;
-  }
-
-  .team-name {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 20px;
-    letter-spacing: 1.5px;
-    color: var(--text);
-  }
-
-  .team-captain {
-    font-size: 12px;
-    color: var(--muted);
-    margin-top: 1px;
-  }
-
-  .budget-chip {
-    text-align: right;
-  }
-
-  .budget-amount {
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--accent);
-  }
-
-  .budget-label {
-    font-size: 10px;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-
-  /* BUDGET BAR */
-  .budget-bar-wrap {
-    background: var(--surface2);
-    border-radius: 4px;
-    height: 6px;
-    overflow: hidden;
-    margin-bottom: 10px;
-  }
-
-  .budget-bar-fill {
-    height: 100%;
-    border-radius: 4px;
-    background: linear-gradient(90deg, var(--green), var(--accent));
-    transition: width 0.5s ease;
-  }
-
-  /* PLAYERS LIST */
-  .players-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-  }
-
+  @keyframes slideIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+  .team-card-header { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:10px; }
+  .team-name { font-family:'Bebas Neue',sans-serif; font-size:20px; letter-spacing:1.5px; }
+  .team-captain { font-size:12px; color:var(--muted); margin-top:1px; }
+  .budget-chip { text-align:right; }
+  .budget-amount { font-size:18px; font-weight:700; color:var(--accent); }
+  .budget-label { font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:1px; }
+  .budget-bar-wrap { background:var(--surface2); border-radius:4px; height:6px; overflow:hidden; margin-bottom:10px; }
+  .budget-bar-fill { height:100%; border-radius:4px; background:linear-gradient(90deg,var(--green),var(--accent)); transition:width 0.5s ease; }
+  .players-list { display:flex; flex-wrap:wrap; gap:6px; }
   .player-chip {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 4px 10px;
-    font-size: 12px;
-    color: var(--text);
-    font-weight: 500;
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 6px; padding: 4px 10px; font-size: 12px; font-weight: 500;
   }
+  .no-players { font-size:13px; color:var(--muted); font-style:italic; }
 
-  .no-players {
-    font-size: 13px;
-    color: var(--muted);
-    font-style: italic;
+  /* ── END SCREEN ── */
+  #endScreen {
+    display: none;
+    position: fixed; inset: 0; z-index: 200;
+    background: var(--bg);
+    overflow-y: auto;
+    padding: 24px 16px 48px;
+    animation: fadeIn 0.4s ease;
+  }
+  @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+  .end-header {
+    text-align: center; margin-bottom: 32px; padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+  }
+  .end-trophy { font-size: 56px; display: block; margin-bottom: 12px; }
+  .end-title {
+    font-family: 'Bebas Neue', sans-serif; font-size: 48px; letter-spacing: 4px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+  .end-sub { color: var(--muted); font-size: 15px; margin-top: 6px; }
+  .end-teams { display: flex; flex-direction: column; gap: 16px; margin-bottom: 24px; }
+  .end-team-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); overflow: hidden;
+  }
+  .end-team-header {
+    padding: 14px 16px;
+    background: var(--surface2); border-bottom: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .end-team-name { font-family:'Bebas Neue',sans-serif; font-size:22px; letter-spacing:2px; }
+  .end-team-meta { font-size:12px; color:var(--muted); }
+  .end-team-body { padding: 14px 16px; }
+  .end-players-list { font-size: 14px; color: var(--text); line-height: 1.9; }
+  .end-player-line { display: flex; align-items: center; gap: 8px; }
+  .end-player-line::before {
+    content: '▸'; color: var(--accent); font-size: 10px; flex-shrink: 0;
+  }
+  .copy-box {
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 8px; padding: 12px 14px;
+    font-family: monospace; font-size: 13px; color: var(--muted);
+    white-space: pre-wrap; word-break: break-word;
+    margin-top: 10px; line-height: 1.7;
+  }
+  .btn-copy {
+    width: 100%; margin-top: 8px; padding: 10px;
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 8px; color: var(--text); font-family:'DM Sans',sans-serif;
+    font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s;
+  }
+  .btn-copy:hover { border-color: var(--accent); color: var(--accent); }
+  .btn-copy.copied { border-color: var(--green); color: var(--green); }
+  .btn-copy-all {
+    width: 100%; padding: 14px; margin-bottom: 16px;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 10px; color: var(--text); font-family:'DM Sans',sans-serif;
+    font-size: 15px; font-weight: 700; cursor: pointer; transition: all 0.2s;
+    letter-spacing: 0.5px;
+  }
+  .btn-copy-all:hover { border-color: var(--accent); color: var(--accent); }
+  .btn-new-auction {
+    width: 100%; padding: 16px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: #000; border: none; border-radius: 10px;
+    font-family:'DM Sans',sans-serif; font-size:16px; font-weight:700;
+    letter-spacing:1px; text-transform:uppercase; cursor:pointer; transition:all 0.2s;
+  }
+  .btn-new-auction:hover { transform:translateY(-2px); box-shadow:0 8px 28px rgba(240,180,41,0.35); }
+  .end-divider {
+    text-align:center; font-size:11px; text-transform:uppercase;
+    letter-spacing:2px; color:var(--muted); margin:20px 0 12px;
   }
 </style>
 </head>
 <body>
 
+<!-- TOPBAR -->
 <div class="topbar">
   <div style="display:flex;align-items:center;gap:10px">
     <div class="topbar-logo">⚡ BidWar</div>
     <div class="live-badge"><div class="live-dot"></div>Live</div>
   </div>
   <div class="topbar-actions">
-    <button class="icon-btn undo" onclick="undoLastBid()">↩ Undo</button>
-    <button class="icon-btn" onclick="toggleFullScreen()">⛶ Full</button>
+    <button class="icon-btn undo" id="btnUndo">↩ Undo</button>
+    <button class="icon-btn" id="btnFullscreen">⛶ Full</button>
+    <button class="icon-btn finish" id="btnFinish">✓ Finish</button>
   </div>
 </div>
 
-<div class="main">
+<!-- AUCTION SCREEN -->
+<div class="main" id="auctionScreen">
 
-  <!-- BID PANEL -->
   <div class="bid-panel">
     <div class="panel-title">Place Bid</div>
-
     <label>Player</label>
     <select id="playerSelect"></select>
-
     <label>Team</label>
     <select id="teamSelect"></select>
-
     <label>Bid Amount</label>
     <div class="quick-bid">
-      <div class="qb" onclick="setBid(50)">₹50</div>
-      <div class="qb" onclick="setBid(100)">₹100</div>
-      <div class="qb" onclick="setBid(200)">₹200</div>
-      <div class="qb" onclick="setBid(500)">₹500</div>
-      <div class="qb" onclick="setBid(1000)">₹1K</div>
+      <div class="qb" data-amt="50">₹50</div>
+      <div class="qb" data-amt="100">₹100</div>
+      <div class="qb" data-amt="200">₹200</div>
+      <div class="qb" data-amt="500">₹500</div>
+      <div class="qb" data-amt="1000">₹1K</div>
     </div>
     <input type="number" id="amount" placeholder="Or type custom amount">
-
     <div class="btn-row">
-      <button class="btn-random" onclick="selectRandomPlayer()">🎲 Random</button>
-      <button class="btn-add" onclick="addPlayer()">Confirm Bid ✓</button>
+      <button class="btn-random" id="btnRandom">🎲 Random</button>
+      <button class="btn-add" id="btnAdd">Confirm Bid ✓</button>
     </div>
   </div>
 
-  <!-- TEAMS -->
   <div class="section-header">
     <h3>Teams</h3>
     <div class="count" id="teamCount">0 teams</div>
   </div>
-
   <div class="teams-grid" id="teamsDisplay"></div>
 
 </div>
 
-<script>
-function setBid(v){ document.getElementById("amount").value = v; }
-</script>
+<!-- END SCREEN -->
+<div id="endScreen">
+  <div class="end-header">
+    <span class="end-trophy">🏆</span>
+    <div class="end-title">Auction Complete</div>
+    <div class="end-sub" id="endSub">All done! Here are the final squads.</div>
+  </div>
+
+  <button class="btn-copy-all" id="btnCopyAll">📋 Copy All Teams</button>
+
+  <div class="end-teams" id="endTeams"></div>
+
+  <div class="end-divider">Start Over</div>
+  <button class="btn-new-auction" onclick="window.location.href='auctionpage1.html'">🚀 New Auction</button>
+</div>
+
 <script src="auctionpage4.js"></script>
-<script>
-// Patch loadTeams for the new beautiful UI
-const _origLoadTeams = loadTeams;
-loadTeams = function(){
-  const display = document.getElementById("teamsDisplay");
-  const countEl = document.getElementById("teamCount");
-  teamSelect.innerHTML = "";
-  display.innerHTML = "";
-  countEl.textContent = teams.length + " team" + (teams.length !== 1 ? "s" : "");
-
-  teams.forEach((t, i) => {
-    const o = document.createElement("option");
-    o.value = i; o.textContent = t.name;
-    teamSelect.appendChild(o);
-
-    const pct = t.budget > 0 ? Math.round((t.remaining / t.budget) * 100) : 100;
-    const barColor = pct > 50 ? '' : pct > 20 ? 'background:linear-gradient(90deg,#f59e0b,#ef4444)' : 'background:#ef4444';
-
-    const playersHtml = t.players.length
-      ? t.players.map(p => `<div class="player-chip">${p}</div>`).join('')
-      : '<span class="no-players">No players yet</span>';
-
-    display.innerHTML += `
-    <div class="team-card">
-      <div class="team-card-header">
-        <div>
-          <div class="team-name">${t.name}</div>
-          <div class="team-captain">👑 ${t.captain}</div>
-        </div>
-        <div class="budget-chip">
-          <div class="budget-amount">₹${t.remaining.toLocaleString()}</div>
-          <div class="budget-label">Remaining</div>
-        </div>
-      </div>
-      <div class="budget-bar-wrap">
-        <div class="budget-bar-fill" style="width:${pct}%;${barColor}"></div>
-      </div>
-      <div class="players-list">${playersHtml}</div>
-    </div>`;
-  });
-};
-
-loadTeams();
-</script>
 </body>
 </html>
